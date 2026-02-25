@@ -14,7 +14,7 @@ services:
     env: docker
     plan: free
     dockerContext: .
-    dockerfilePath: backend/Dockerfile
+    dockerfilePath: ./backend/Dockerfile
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -41,7 +41,7 @@ services:
     env: docker
     plan: free
     dockerContext: .
-    dockerfilePath: backend/Dockerfile
+    dockerfilePath: ./backend/Dockerfile
     dockerCommand: celery -A config worker -l info
     envVars:
       - key: DATABASE_URL
@@ -61,7 +61,7 @@ services:
     env: docker
     plan: free
     dockerContext: .
-    dockerfilePath: frontend/Dockerfile
+    dockerfilePath: ./frontend/Dockerfile
     envVars:
       - key: NEXT_PUBLIC_API_URL
         value: https://tradingcardpro-backend.onrender.com/api # Replace with your actual backend URL
