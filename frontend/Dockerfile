@@ -4,14 +4,14 @@ FROM node:20-slim AS base
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY frontend/package.json frontend/package-lock.json* ./
 RUN npm ci
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY frontend/ .
 
 # Next.js collects completely anonymous telemetry regarding usage during builds.
 # Learn more here: https://nextjs.org/telemetry
