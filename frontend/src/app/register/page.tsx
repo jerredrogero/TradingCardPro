@@ -35,11 +35,24 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterValues) => {
     setIsLoading(true);
     setError(null);
+    console.log("Attempting registration with data:", { ...data, password: '***' });
+    console.log("Using API URL:", api.defaults.baseURL);
+    
     try {
       const res = await api.post<AuthResponse>("/auth/register/", data);
+      console.log("Registration successful:", res.data);
       login(res.data);
     } catch (err: any) {
-      console.error("Registration error details:", err.response?.data);
+      console.error("Full registration error object:", err);
+      if (err.response) {
+        console.error("Error response data:", err.response.data);
+        console.error("Error response status:", err.response.status);
+      } else if (err.request) {
+        console.error("Error request (no response):", err.request);
+      } else {
+        console.error("Error message:", err.message);
+      }
+      
       const errData = err.response?.data;
       if (typeof errData === 'object' && errData !== null) {
         const errorMessages = Object.entries(errData).map(([key, value]) => {
