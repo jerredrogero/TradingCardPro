@@ -124,6 +124,11 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:3000').split(',')]
 CORS_ALLOW_CREDENTIALS = True
 
+# CSRF
+CSRF_TRUSTED_ORIGINS = [f"https://{host.strip()}" for host in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if host.strip()]
+if not CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:8000']
+
 # Celery
 CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/0')
 CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/0')
