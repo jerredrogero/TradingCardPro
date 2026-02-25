@@ -13,7 +13,7 @@ services:
     name: tradingcardpro-backend
     env: docker
     plan: free
-    dockerContext: ./backend
+    dockerContext: backend
     dockerfilePath: Dockerfile
     envVars:
       - key: DATABASE_URL
@@ -40,7 +40,7 @@ services:
     name: tradingcardpro-celery-worker
     env: docker
     plan: free
-    dockerContext: ./backend
+    dockerContext: backend
     dockerfilePath: Dockerfile
     dockerCommand: celery -A config worker -l info
     envVars:
@@ -60,7 +60,7 @@ services:
     name: tradingcardpro-frontend
     env: docker
     plan: free
-    dockerContext: ./frontend
+    dockerContext: frontend
     dockerfilePath: Dockerfile
     envVars:
       - key: NEXT_PUBLIC_API_URL
