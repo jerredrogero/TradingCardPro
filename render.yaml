@@ -1,9 +1,10 @@
-services:
-  - type: db
-    name: tradingcardpro-db
-    engine: postgres
+databases:
+  - name: tradingcardpro-db
+    databaseName: tradingcardpro
+    user: tradingcardpro
     plan: free
 
+services:
   - type: redis
     name: tradingcardpro-redis
     plan: free
