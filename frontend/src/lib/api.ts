@@ -4,6 +4,11 @@ const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
 });
 
+// Log the baseURL for debugging
+if (typeof window !== 'undefined') {
+  console.log("API baseURL initialized as:", api.defaults.baseURL);
+}
+
 // Request interceptor to add the auth token
 api.interceptors.request.use(
   async (config) => {
