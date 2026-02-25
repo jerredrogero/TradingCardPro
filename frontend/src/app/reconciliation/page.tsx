@@ -82,7 +82,7 @@ export default function ReconciliationPage() {
       cell: ({ row }) => {
         const status = row.original.status;
         let variant: "default" | "secondary" | "destructive" | "outline" = "outline";
-        let label = status;
+        let label: string = status;
 
         if (status === "pending") {
           variant = "destructive";
