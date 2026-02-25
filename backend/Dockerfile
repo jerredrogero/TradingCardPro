@@ -26,4 +26,4 @@ COPY backend/ /app/
 EXPOSE 8000
 
 # Run the application using gunicorn
-CMD gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+CMD python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
