@@ -9,7 +9,11 @@ class Shop(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            import uuid
+            base_slug = slugify(self.name)
+            if not base_slug:
+                base_slug = "shop"
+            self.slug = f"{base_slug}-{uuid.uuid4().hex[:8]}"
         super().save(*args, **kwargs)
 
     def __str__(self):
