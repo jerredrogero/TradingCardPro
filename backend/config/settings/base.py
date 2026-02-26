@@ -121,13 +121,19 @@ SIMPLE_JWT = {
 }
 
 # CORS
-CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:3000').split(',')]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # CSRF
-CSRF_TRUSTED_ORIGINS = [f"https://{host.strip()}" for host in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if host.strip()]
-if not CSRF_TRUSTED_ORIGINS:
-    CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:8000']
+CSRF_TRUSTED_ORIGINS = [
+    'https://tradingcardpro-backend.onrender.com',
+    'https://tradingcardpro-frontend.onrender.com',
+    'https://slabtracker-frontend.onrender.com',
+    'https://slabtracker-backend.onrender.com',
+]
 
 # Celery
 CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/0')
